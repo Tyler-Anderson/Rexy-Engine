@@ -1,0 +1,22 @@
+{ "name" : "Rexy"
+, "description": "Rexster library"
+, "version" : "0.1"
+, "url" : "https://github.com/Tyler-Anderson/Rexy"
+, "author" : "Tyler Anderson <tyler@brava.do>"
+, "engines" : { "node": ">= 0.6" }
+, "main" : "./lib/rexy"
+, "dependencies" : {
+    "restler" : ">=2.0.1"
+    }
+, "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/Tyler-Anderson/Rexy.git"
+    }
+, "keywords": [
+    "graph",
+    "database",
+    "rexster",
+    "blueprints",
+    "gremlin",
+    "api"]
+}
