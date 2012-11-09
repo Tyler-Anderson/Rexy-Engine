@@ -7,25 +7,20 @@
 
   Author: Tyler Anderson
   github: Tyler-Anderson
+  email: tyler@brava.do
   twitter: _Bravado
-  website: http://Brava.do
+  website: http://brava.do
 
 ----------------------------------###
 
-rest = require("./node_modules/restler")
+rest = require 'restler'
 
-class Rex
+class Rexy
     constructor: (url, db) ->
         @url = url + "/graphs/"
         @db = db
 
     #---GET Operations---
-        
-    #logback : (logme) ->
-    #   console.log "log me!", logme
-        #console.log logme._id
-        #console.log logme._type
-
     getGraphs : (cb) ->
         rest.get(@url)
             .on "complete", (data) ->
@@ -397,6 +392,7 @@ class Rex
             .on "complete", (data) ->
                 cb data
         true
+        
     
     #---Gremlin extension---
 
@@ -419,6 +415,7 @@ class Rex
         true
 
     #---Frames extension---
+    
 
     frameV : (cb, id, frame) ->
         rest.get(@url + @db + "/vertices/" + id + "/tp/frames/" + frame)
@@ -439,57 +436,4 @@ class Rex
         true
 
 
-module.exports = Rex
-
-###
-#Random examples/texts below here
-myGraph = new Rex "http://server:port", "examplegraph"
-
-#myGraph.postVertex()
-obj1 =
-    _action: 'create'
-    _type: 'vertex'
-    _id: 100
-    k1: 'v1'
-obj2 =
-    _action: 'create'
-    _type: 'vertex'
-    _id: 1
-    name: 'okram'
-    k1: 'v4'
-
-    edgy :
-        outV:21600068
-        outV:"6:30"
-        label:"jah"
-        inV:"6:70"
-        inV:21600084
-        properties:
-            blah:'kay'
-            meow:'purr'
-
-
-#testy ={tx: [obj1,obj2] }
-#console.log testy
-#myGraph.postBatch testy
-
-batch transactions are of form 
-{
-“tx”: [
-{
-“_action”: “create”,
-“_type”: “vertex”,
-“_id”: 100,
-“k1”: “v1”
-},
-{
-“_action”: “update”,
-“_type”: “vertex”,
-“_id”: 1,
-“name”: “okram”,
-“k1”: “v4”
-}]
-
-valid actions are create, update, and delete
-each action requires a valid type (vertex or edge)
-###
+module.exports = Rexy

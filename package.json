@@ -1,6 +1,6 @@
-{ "name" : "Rexy-Engine"
+{ "name" : "rexy-engine"
 , "description": "json library for the Rexster API"
-, "version" : "0.1"
+, "version" : "0.1.0"
 , "url" : "https://github.com/Tyler-Anderson/Rexy-Engine"
 , "author" : "Tyler Anderson <tyler@brava.do>"
 , "engines" : { "node": ">= 0.6" }
