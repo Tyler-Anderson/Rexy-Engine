@@ -193,8 +193,6 @@ class Rexy
          rest.get(@url + @db + "/edges" + "/vertices/" + req.id + "/bothE" + _buf)
             .on "complete", (data) ->
                 cb data
-            .on "error", (error) ->
-                cb error
         true
 
     getByEdgeLabel : (cb, req) ->
@@ -246,8 +244,8 @@ class Rexy
         rest.post(@url + @db + "/vertices/")
             .on "complete", (data) ->
                 cb data
-            .on "error", (error) ->
-                console.log error
+            #.on "error", (error) ->
+            #    console.log error
         true
 
     postVertexWithId : (cb, id) ->
@@ -259,7 +257,6 @@ class Rexy
     #postCreateOrUpdateV takes a properties object for k/v pairs
     postCreateOrUpdateV : (cb, req, _buf = "") ->
         for k,v of req.properties
-            console.log k,v
             _buf +=  k + "=" + v + "&"
         _buf = _buf.slice 0, -1
         rest.post(@url + @db + "/vertices/" + req.id + "?" + _buf)
@@ -273,8 +270,6 @@ class Rexy
         rest.post(@url + @db + "/edges?_outV=" + req.outV + "&_label=" + req.label + "&_inV=" + req.inV + _buf)
             .on "complete", (data) ->
                 cb data
-            .on "error", (error) ->
-                console.log error
 
     #sig id, outV, label, inV
     postEdgeWithId : (cb, req, _buf = "") ->
@@ -384,7 +379,7 @@ class Rexy
         _buf += "]"
         rest.get(@url + @db + "/tp/batch/edges?idList=" + _buf)
             .on "complete", (data) ->
-                console.data.results
+                cb data
         true
 
     postBatch : (cb, txList) ->
