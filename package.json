@@ -1,16 +1,16 @@
 { "name" : "Rexy"
-, "description": "Rexster library"
+, "description": "json library for the Rexster API"
 , "version" : "0.1"
-, "url" : "https://github.com/Tyler-Anderson/Rexy"
+, "url" : "https://github.com/Tyler-Anderson/Rexy-Engine"
 , "author" : "Tyler Anderson <tyler@brava.do>"
 , "engines" : { "node": ">= 0.6" }
-, "main" : "./lib/rexy"
+, "main" : "./lib/rexy-engine"
 , "dependencies" : {
     "restler" : ">=2.0.1"
     }
 , "repository" : {
     "type" : "git",
-    "url" : "https://github.com/Tyler-Anderson/Rexy.git"
+    "url" : "https://github.com/Tyler-Anderson/Rexy-Engine.git"
     }
 , "keywords": [
     "graph",
