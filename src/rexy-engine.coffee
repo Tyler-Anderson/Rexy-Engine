@@ -21,19 +21,19 @@ class Rexy_Engine
         @db = db
 
     #---GET Operations---
-    getGraphs : (cb) ->
+    getGraphs : (ctx, cb) ->
         rest.get(@url)
             .on "complete", (data) ->
                 cb.call ctx, data
         true
 
-    getNamedGraph : (cb) ->
+    getNamedGraph : (ctx, cb) ->
         rest.get(@url + @db)
             .on "complete", (data) ->
                 cb.call ctx, data
         true
 
-    getVertices : (cb) ->
+    getVertices : (ctx, cb) ->
         rest.get(@url + @db + "/vertices")
             .on "complete", (data) ->
                 cb.call ctx, data
@@ -45,7 +45,7 @@ class Rexy_Engine
                 cb.call ctx, data
         true
 
-    getAdjacentOut: (ctx, cb, req, _buf = "") ->
+    getAdjacentOut: (ctx, cb, req) ->
         if req.params
             _buf += "?"
             for k,v of req.params
@@ -56,7 +56,7 @@ class Rexy_Engine
                 cb.call ctx, data
         true
 
-    getAdjacentIn: (ctx, cb, req, _buf = "") ->
+    getAdjacentIn: (ctx, cb, req) ->
         if req.params
             _buf += "?"
             for k,v of req.params
@@ -67,7 +67,7 @@ class Rexy_Engine
                 cb.call ctx, data
         true
 
-    getAdjacentBoth: (ctx, cb, req, _buf = "") ->
+    getAdjacentBoth: (ctx, cb, req) ->
         if req.params
             _buf += "?"
             for k,v of req.params
@@ -78,7 +78,7 @@ class Rexy_Engine
                 cb.call ctx, data
         true
 
-    getOutVerticesCount : (ctx, cb, req, _buf = "") ->
+    getOutVerticesCount : (ctx, cb, req) ->
         if req.params
             _buf += "?"
             for k,v of req.params
@@ -89,7 +89,7 @@ class Rexy_Engine
                 cb.call ctx, data
         true
 
-    getInVerticesCount : (ctx, cb, req, _buf = "") ->
+    getInVerticesCount : (ctx, cb, req) ->
         if req.params
             _buf += "?"
             for k,v of req.params
@@ -100,7 +100,7 @@ class Rexy_Engine
                 cb.call ctx, data
         true
 
-    getBothVerticesCount : (ctx, cb, req, _buf = "") ->
+    getBothVerticesCount : (ctx, cb, req) ->
         if req.params
             _buf += "?"
             for k,v of req.params
@@ -111,7 +111,7 @@ class Rexy_Engine
                 cb.call ctx, data
         true
 
-    getOutVertices : (ctx, cb, req, _buf = "") ->
+    getOutVertices : (ctx, cb, req) ->
         if req.params
             _buf += "?"
             for k,v of req.params
@@ -122,7 +122,7 @@ class Rexy_Engine
                 cb.call ctx, data
         true
 
-    getInVertices : (ctx, cb, req, _buf = "") ->
+    getInVertices : (ctx, cb, req) ->
         if req.params
             _buf += "?"
             for k,v of req.params
@@ -133,7 +133,7 @@ class Rexy_Engine
                 cb.call ctx, data
         true
 
-    getByBothVertices : (ctx, cb, req, _buf="") ->
+    getByBothVertices : (ctx, cb, req) ->
         if req.params
             _buf += "?"
             for k,v of req.params
@@ -150,7 +150,7 @@ class Rexy_Engine
                 cb.call ctx, data
         true
 
-    getEdges : (cb) ->
+    getEdges : (ctx, cb) ->
         rest.get(@url + @db + "/edges")
             .on "complete", (data) ->
                 cb.call ctx, data
@@ -162,7 +162,7 @@ class Rexy_Engine
                 cb.call ctx, data
         true
 
-    getVertexOutEdges : (ctx, cb, req, _buf = "") ->
+    getVertexOutEdges : (ctx, cb, req) ->
         if req.params
             _buf += "?"
             for k,v of req.params
@@ -173,7 +173,7 @@ class Rexy_Engine
                 cb.call ctx, data
         true
 
-    getVertexInEdges : (ctx, cb, req, _buf = "") ->
+    getVertexInEdges : (ctx, cb, req) ->
         if req.params
             _buf += "?"
             for k,v of req.params
@@ -184,7 +184,7 @@ class Rexy_Engine
                 cb.call ctx, data
         true
 
-    getVertexBothEdges : (ctx, cb, req, _buf = "") ->
+    getVertexBothEdges : (ctx, cb, req) ->
         if req.params
             _buf += "?"
             for k,v of req.params
@@ -201,7 +201,7 @@ class Rexy_Engine
                 cb.call ctx, data
         true
 
-    getIndices : (cb) ->
+    getIndices : (ctx, cb) ->
         rest.get(@url + @db + "/indices")
             .on "complete", (data) ->
                 cb.call ctx, data
@@ -219,19 +219,19 @@ class Rexy_Engine
                 cb.call ctx, data
         true
 
-    getKeyIndices : (cb) ->
+    getKeyIndices : (ctx, cb) ->
         rest.get(@url + @db + "/keyindices/")
             .on "complete", (data) ->
                 cb.call ctx, data
         true
 
-    getVertexKeys : (cb) ->
+    getVertexKeys : (ctx, cb) ->
         rest.get(@url + @db + "/keyindices/vertex")
             .on "complete", (data) ->
                 cb.call ctx, data
         true
 
-    getEdgeKeys : (cb) ->
+    getEdgeKeys : (ctx, cb) ->
         rest.get(@url + @db + "/keyindices/edge")
             .on "complete", (data) ->
                 cb.call ctx, data
@@ -240,7 +240,7 @@ class Rexy_Engine
             
     #---POST Operations---
 
-    postVertex : (cb) ->
+    postVertex : (ctx, cb) ->
         rest.post(@url + @db + "/vertices/")
             .on "complete", (data) ->
                 cb.call ctx, data
@@ -255,7 +255,7 @@ class Rexy_Engine
         true
             
     #postCreateOrUpdateV takes a properties object for k/v pairs
-    postCreateOrUpdateV : (ctx, cb, req, _buf = "") ->
+    postCreateOrUpdateV : (ctx, cb, req) ->
         for k,v of req.properties
             _buf +=  k + "=" + v + "&"
         _buf = _buf.slice 0, -1
@@ -264,7 +264,7 @@ class Rexy_Engine
                 cb.call ctx, data
         true
 
-    postEdgeWithLabel : (ctx, cb, req, _buf = "") ->
+    postEdgeWithLabel : (ctx, cb, req) ->
         for k, v of req.properties
             _buf += "&" + k + "=" + v
         rest.post(@url + @db + "/edges?_outV=" + req.outV + "&_label=" + req.label + "&_inV=" + req.inV + _buf)
@@ -272,7 +272,7 @@ class Rexy_Engine
                 cb.call ctx, data
 
     #sig id, outV, label, inV
-    postEdgeWithId : (ctx, cb, req, _buf = "") ->
+    postEdgeWithId : (ctx, cb, req) ->
         for k,v of req.properties
             _buf += "&" + k + "=" + v
         rest.post(@url + @db + "/edges/" + req._id + "?_outV=" + req.outV + "&_label=" + req.label + "&_inV=" + req.inV + _buf)
@@ -281,7 +281,7 @@ class Rexy_Engine
         true
 
     #properties are k/v pairs of key mappings, as in key=key for the rest, may work with other mappings idk
-    postUpdateEdge : (ctx, cb, req, _buf = "") ->
+    postUpdateEdge : (ctx, cb, req) ->
         for k,v of req.properties
             _buf += k + "=" + v + "&"
         _buf = _buf.slice 0, -1
@@ -314,7 +314,7 @@ class Rexy_Engine
                 cb.call ctx, data
         true
 
-    putReplaceEProperties : (ctx, cb, req, _buf = "") ->
+    putReplaceEProperties : (ctx, cb, req) ->
         for k,v of req.properties
             _buf += k + "=" + v + "&"
         _buf = _buf.slice 0, -1
@@ -360,8 +360,8 @@ class Rexy_Engine
     #---Batch Kibble extension---
     
     #takes array of id's
-    getBatchV : (ctx, cb, idList, _buf = "") ->
-        _buf += "["
+    getBatchV : (ctx, cb, idList) ->
+        _buf = "["
         for i in [0...idList.length]
             _buf += idList[i] += ","
         _buf = _buf.slice 0, -1
@@ -371,8 +371,8 @@ class Rexy_Engine
                 cb.call ctx, data
         true
 
-    getBatchE : (ctx, cb, req, _buf = "") ->
-        _buf += "["
+    getBatchE : (ctx, cb, req) ->
+        _buf = "["
         for i in [0...idList.length]
             _buf += idList[i] += ","
         _buf = _buf.slice 0, -1
