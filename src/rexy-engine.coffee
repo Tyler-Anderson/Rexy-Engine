@@ -15,7 +15,7 @@
 
 rest = require 'restler'
 
-class Rexy
+class Rexy_Engine
     constructor: (url, db) ->
         @url = url + "/graphs/"
         @db = db
@@ -431,4 +431,4 @@ class Rexy
         true
 
 
-module.exports = Rexy
+module.exports = Rexy_Engine
