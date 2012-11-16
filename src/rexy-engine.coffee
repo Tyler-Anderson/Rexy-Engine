@@ -24,217 +24,217 @@ class Rexy
     getGraphs : (cb) ->
         rest.get(@url)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
     getNamedGraph : (cb) ->
         rest.get(@url + @db)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
     getVertices : (cb) ->
         rest.get(@url + @db + "/vertices")
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    getVertexWithId: (cb, id) ->
+    getVertexWithId: (ctx, cb, id) ->
         rest.get(@url + @db + "/vertices/" + id)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    getAdjacentOut: (cb, req, _buf = "") ->
+    getAdjacentOut: (ctx, cb, req, _buf = "") ->
         if req.params
             _buf += "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
-        rest.get(@url + @db + "/vertices/" + req.id + "/out" + _buf)
+        rest.get(@url + @db + "/vertices/" + req._id + "/out" + _buf)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    getAdjacentIn: (cb, req, _buf = "") ->
+    getAdjacentIn: (ctx, cb, req, _buf = "") ->
         if req.params
             _buf += "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
-        rest.get(@url + @db + "/vertices/" + req.id + "/in" + _buf)
+        rest.get(@url + @db + "/vertices/" + req._id + "/in" + _buf)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    getAdjacentBoth: (cb, req, _buf = "") ->
+    getAdjacentBoth: (ctx, cb, req, _buf = "") ->
         if req.params
             _buf += "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
-        rest.get(@url + @db + "/vertices/" + req.id + "/both" + _buf)
+        rest.get(@url + @db + "/vertices/" + req._id + "/both" + _buf)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    getOutVerticesCount : (cb, req, _buf = "") ->
+    getOutVerticesCount : (ctx, cb, req, _buf = "") ->
         if req.params
             _buf += "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
-        rest.get(@url + @db + "/vertices/" + req.id + "/outCount" + _buf)
+        rest.get(@url + @db + "/vertices/" + req._id + "/outCount" + _buf)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    getInVerticesCount : (cb, req, _buf = "") ->
+    getInVerticesCount : (ctx, cb, req, _buf = "") ->
         if req.params
             _buf += "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
-        rest.get(@url + @db + "/vertices/" + req.id + "/inCount" + _buf)
+        rest.get(@url + @db + "/vertices/" + req._id + "/inCount" + _buf)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    getBothVerticesCount : (cb, req, _buf = "") ->
+    getBothVerticesCount : (ctx, cb, req, _buf = "") ->
         if req.params
             _buf += "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
-        rest.get(@url + @db + "/vertices/" + req.id + "/bothCount" + _buf)
+        rest.get(@url + @db + "/vertices/" + req._id + "/bothCount" + _buf)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    getOutVertices : (cb, req, _buf = "") ->
+    getOutVertices : (ctx, cb, req, _buf = "") ->
         if req.params
             _buf += "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
-        rest.get(@url + @db + "/vertices/" + req.id + "/outIds" + _buf)
+        rest.get(@url + @db + "/vertices/" + req._id + "/outIds" + _buf)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    getInVertices : (cb, req, _buf = "") ->
+    getInVertices : (ctx, cb, req, _buf = "") ->
         if req.params
             _buf += "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
-        rest.get(@url + @db + "/vertices/" + req.id + "/inIds" + _buf)
+        rest.get(@url + @db + "/vertices/" + req._id + "/inIds" + _buf)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    getByBothVertices : (cb, req, _buf="") ->
+    getByBothVertices : (ctx, cb, req, _buf="") ->
         if req.params
             _buf += "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
-        rest.get(@url + @db + "/vertices/" + req.id + "/bothIds" + _buf)
+        rest.get(@url + @db + "/vertices/" + req._id + "/bothIds" + _buf)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    getAdjacentByEdgeLabel : (cb, req) ->
-        rest.get(@url + @db + "/vertices/" + req.id + req.dir + "?_" + req.label + "=written_by")
+    getAdjacentByEdgeLabel : (ctx, cb, req) ->
+        rest.get(@url + @db + "/vertices/" + req._id + req.dir + "?_" + req.label + "=written_by")
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
     getEdges : (cb) ->
         rest.get(@url + @db + "/edges")
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    getEdgeById : (cb, id) ->
+    getEdgeById : (ctx, cb, id) ->
         rest.get(@url + @db + "/edges" + id)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    getVertexOutEdges : (cb, req, _buf = "") ->
+    getVertexOutEdges : (ctx, cb, req, _buf = "") ->
         if req.params
             _buf += "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
-        rest.get(@url + @db + "/edges" + "/vertices/" + req.id + "/outE" + _buf)
+        rest.get(@url + @db + "/edges" + "/vertices/" + req._id + "/outE" + _buf)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    getVertexInEdges : (cb, req, _buf = "") ->
+    getVertexInEdges : (ctx, cb, req, _buf = "") ->
         if req.params
             _buf += "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
-        rest.get(@url + @db + "/edges" + "/vertices/" + req.id + "/inE" + _buf)
+        rest.get(@url + @db + "/edges" + "/vertices/" + req._id + "/inE" + _buf)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    getVertexBothEdges : (cb, req, _buf = "") ->
+    getVertexBothEdges : (ctx, cb, req, _buf = "") ->
         if req.params
             _buf += "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
-         rest.get(@url + @db + "/edges" + "/vertices/" + req.id + "/bothE" + _buf)
+         rest.get(@url + @db + "/edges" + "/vertices/" + req._id + "/bothE" + _buf)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    getByEdgeLabel : (cb, req) ->
-        rest.get(@url + @db + "/vertices/" + req.id + req.dir + "E?_" + req.label + "=written_by")
+    getByEdgeLabel : (ctx, cb, req) ->
+        rest.get(@url + @db + "/vertices/" + req._id + req.dir + "E?_" + req.label + "=written_by")
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
     getIndices : (cb) ->
         rest.get(@url + @db + "/indices")
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    getElementsByKV : (cb, req) ->
+    getElementsByKV : (ctx, cb, req) ->
         rest.get(@url + @db + "/indices/index?key=" + req.key + "&value=" + req.value)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    getElementCountByKV : (cb, req) ->
+    getElementCountByKV : (ctx, cb, req) ->
         rest.get(@url + @db + "/indices/index/count?key=" + req.key + "&value=" + req.value)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
     getKeyIndices : (cb) ->
         rest.get(@url + @db + "/keyindices/")
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
     getVertexKeys : (cb) ->
         rest.get(@url + @db + "/keyindices/vertex")
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
     getEdgeKeys : (cb) ->
         rest.get(@url + @db + "/keyindices/edge")
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
             
@@ -243,124 +243,124 @@ class Rexy
     postVertex : (cb) ->
         rest.post(@url + @db + "/vertices/")
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
             #.on "error", (error) ->
             #    console.log error
         true
 
-    postVertexWithId : (cb, id) ->
+    postVertexWithId : (ctx, cb, id) ->
         rest.post(@url + @db + "/vertices/" + id)
             .on "complete", (data)->
-                cb data
+                cb.call ctx, data
         true
             
     #postCreateOrUpdateV takes a properties object for k/v pairs
-    postCreateOrUpdateV : (cb, req, _buf = "") ->
+    postCreateOrUpdateV : (ctx, cb, req, _buf = "") ->
         for k,v of req.properties
             _buf +=  k + "=" + v + "&"
         _buf = _buf.slice 0, -1
-        rest.post(@url + @db + "/vertices/" + req.id + "?" + _buf)
+        rest.post(@url + @db + "/vertices/" + req._id + "?" + _buf)
             .on "complete", (data)->
-                cb data
+                cb.call ctx, data
         true
 
-    postEdgeWithLabel : (cb, req, _buf = "") ->
+    postEdgeWithLabel : (ctx, cb, req, _buf = "") ->
         for k, v of req.properties
             _buf += "&" + k + "=" + v
         rest.post(@url + @db + "/edges?_outV=" + req.outV + "&_label=" + req.label + "&_inV=" + req.inV + _buf)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
 
     #sig id, outV, label, inV
-    postEdgeWithId : (cb, req, _buf = "") ->
+    postEdgeWithId : (ctx, cb, req, _buf = "") ->
         for k,v of req.properties
             _buf += "&" + k + "=" + v
-        rest.post(@url + @db + "/edges/" + req.id + "?_outV=" + req.outV + "&_label=" + req.label + "&_inV=" + req.inV + _buf)
+        rest.post(@url + @db + "/edges/" + req._id + "?_outV=" + req.outV + "&_label=" + req.label + "&_inV=" + req.inV + _buf)
             .on "complete", (data)->
-                cb data
+                cb.call ctx, data
         true
 
     #properties are k/v pairs of key mappings, as in key=key for the rest, may work with other mappings idk
-    postUpdateEdge : (cb, req, _buf = "") ->
+    postUpdateEdge : (ctx, cb, req, _buf = "") ->
         for k,v of req.properties
             _buf += k + "=" + v + "&"
         _buf = _buf.slice 0, -1
-        rest.post(@url + @db + "/edges/" + req.id + "?" + _buf)
+        rest.post(@url + @db + "/edges/" + req._id + "?" + _buf)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    postManualIndex : (cb, index) ->
+    postManualIndex : (ctx, cb, index) ->
         rest.post(@url + @db + "/indices/" + index + "?class=vertex")
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    postCreateKey : (cb, req) ->
+    postCreateKey : (ctx, cb, req) ->
         rest.post(@url + @db + "/keyindices/" + req.vertex + "/" + req.key)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
 
     #---PUT Operations---
     
-    putReplaceVProperties : (cb, req, buf ="") ->
+    putReplaceVProperties : (ctx, cb, req, buf ="") ->
         for k,v of req.properties
             _buf += k + "=" + v + "&"
         _buf = _buf.slice 0, -1
-        rest.put(@url + @db + "/vertices/" + req.id + "?" + _buf)
+        rest.put(@url + @db + "/vertices/" + req._id + "?" + _buf)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    putReplaceEProperties : (cb, req, _buf = "") ->
+    putReplaceEProperties : (ctx, cb, req, _buf = "") ->
         for k,v of req.properties
             _buf += k + "=" + v + "&"
         _buf = _buf.slice 0, -1
-        rest.put(@url + @db + "/edges/" + req.id + "?" + _buf)
+        rest.put(@url + @db + "/edges/" + req._id + "?" + _buf)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
     
-    putVertexAtIndexByKV : (cb, req) ->
-        rest.put(@url + @db + "/indices/" + req.index + "?key=" + req.key + "&value=" + req.value + "&id=" + req.id)
+    putVertexAtIndexByKV : (ctx, cb, req) ->
+        rest.put(@url + @db + "/indices/" + req.index + "?key=" + req.key + "&value=" + req.value + "&id=" + req._id)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
 
     #---DELETE Operations---
 
-    delVertex : (cb, id) ->
+    delVertex : (ctx, cb, id) ->
         rest.del(@url + @db + "/vertices/" + id)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
     
     #properties is an array keys
-    delVProps : (cb, req) ->
-        rest.del(@url + @db + "/edges/" + req.id + req.properties.join "&")
+    delVProps : (ctx, cb, req) ->
+        rest.del(@url + @db + "/edges/" + req._id + req.properties.join "&")
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    delIndex : (cb, index) ->
+    delIndex : (ctx, cb, index) ->
         rest.del(@url + @db + "/indices/" + index)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    delVertexAtIndexByKV : (cb, req) ->
-        rest.del(@url + @db + "/indices/" + req.index + "?key=" + req.key + "&value=" + req.value + "&class=vertex&id=" + req.id)
+    delVertexAtIndexByKV : (ctx, cb, req) ->
+        rest.del(@url + @db + "/indices/" + req.index + "?key=" + req.key + "&value=" + req.value + "&class=vertex&id=" + req._id)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
     #---Batch Kibble extension---
     
     #takes array of id's
-    getBatchV : (cb, idList, _buf = "") ->
+    getBatchV : (ctx, cb, idList, _buf = "") ->
         _buf += "["
         for i in [0...idList.length]
             _buf += idList[i] += ","
@@ -368,10 +368,10 @@ class Rexy
         _buf += "]"
         rest.get(@url + @db + "/tp/batch/vertices?idList=" + _buf)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    getBatchE : (cb, req, _buf = "") ->
+    getBatchE : (ctx, cb, req, _buf = "") ->
         _buf += "["
         for i in [0...idList.length]
             _buf += idList[i] += ","
@@ -379,55 +379,55 @@ class Rexy
         _buf += "]"
         rest.get(@url + @db + "/tp/batch/edges?idList=" + _buf)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    postBatch : (cb, txList) ->
+    postBatch : (ctx, cb, txList) ->
         rest.postJson(@url + @db + "/tp/batch/tx", txList)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
         
     
     #---Gremlin extension---
 
-    gremlin : (cb, req) ->
+    gremlin : (ctx, cb, req) ->
         rest.postJson(@url + @db + "/tp/gremlin", req)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    gremlinV : (cb, id, req) ->
+    gremlinV : (ctx, cb, id, req) ->
         rest.postJson(@url + @db + "/vertices/" + id + "/tp/gremlin", req)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    gremlinE : (cb, id, req) ->
+    gremlinE : (ctx, cb, id, req) ->
         rest.postJson(@url + @db + "/edges/" + id + "/tp/gremlin", req)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
     #---Frames extension---
     
 
-    frameV : (cb, id, frame) ->
+    frameV : (ctx, cb, id, frame) ->
         rest.get(@url + @db + "/vertices/" + id + "/tp/frames/" + frame)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    frameE : (cb, id, frame) ->
+    frameE : (ctx, cb, id, frame) ->
         rest.get(@url + @db + "/edges/" + id + "/tp/frames/" + frame)
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
-    frameEI : (cb, id, frame) ->
+    frameEI : (ctx, cb, id, frame) ->
         rest.get(@url + @db + "/edges/" + id + "/tp/frames/" + frame + "direction=inverse")
             .on "complete", (data) ->
-                cb data
+                cb.call ctx, data
         true
 
 
