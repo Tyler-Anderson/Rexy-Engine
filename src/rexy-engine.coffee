@@ -46,6 +46,7 @@ class Rexy_Engine
         true
 
     getAdjacentOut: (ctx, cb, req) ->
+        _buf = ""
         if req.params
             _buf += "?"
             for k,v of req.params
@@ -57,6 +58,7 @@ class Rexy_Engine
         true
 
     getAdjacentIn: (ctx, cb, req) ->
+        _buf = ""
         if req.params
             _buf += "?"
             for k,v of req.params
@@ -69,7 +71,7 @@ class Rexy_Engine
 
     getAdjacentBoth: (ctx, cb, req) ->
         if req.params
-            _buf += "?"
+            _buf = "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
@@ -80,7 +82,7 @@ class Rexy_Engine
 
     getOutVerticesCount : (ctx, cb, req) ->
         if req.params
-            _buf += "?"
+            _buf = "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
@@ -91,7 +93,7 @@ class Rexy_Engine
 
     getInVerticesCount : (ctx, cb, req) ->
         if req.params
-            _buf += "?"
+            _buf = "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
@@ -102,7 +104,7 @@ class Rexy_Engine
 
     getBothVerticesCount : (ctx, cb, req) ->
         if req.params
-            _buf += "?"
+            _buf = "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
@@ -113,7 +115,7 @@ class Rexy_Engine
 
     getOutVertices : (ctx, cb, req) ->
         if req.params
-            _buf += "?"
+            _buf = "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
@@ -124,7 +126,7 @@ class Rexy_Engine
 
     getInVertices : (ctx, cb, req) ->
         if req.params
-            _buf += "?"
+            _buf = "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
@@ -135,7 +137,7 @@ class Rexy_Engine
 
     getByBothVertices : (ctx, cb, req) ->
         if req.params
-            _buf += "?"
+            _buf = "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
@@ -164,7 +166,7 @@ class Rexy_Engine
 
     getVertexOutEdges : (ctx, cb, req) ->
         if req.params
-            _buf += "?"
+            _buf = "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
@@ -175,7 +177,7 @@ class Rexy_Engine
 
     getVertexInEdges : (ctx, cb, req) ->
         if req.params
-            _buf += "?"
+            _buf = "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
@@ -186,7 +188,7 @@ class Rexy_Engine
 
     getVertexBothEdges : (ctx, cb, req) ->
         if req.params
-            _buf += "?"
+            _buf = "?"
             for k,v of req.params
                 _buf +=  k + "=" + v + "&"
             _buf = _buf.slice 0, -1
@@ -256,6 +258,7 @@ class Rexy_Engine
             
     #postCreateOrUpdateV takes a properties object for k/v pairs
     postCreateOrUpdateV : (ctx, cb, req) ->
+        _buf = ""
         for k,v of req.properties
             _buf +=  k + "=" + v + "&"
         _buf = _buf.slice 0, -1
@@ -265,6 +268,7 @@ class Rexy_Engine
         true
 
     postEdgeWithLabel : (ctx, cb, req) ->
+        _buf = ""
         for k, v of req.properties
             _buf += "&" + k + "=" + v
         rest.post(@url + @db + "/edges?_outV=" + req.outV + "&_label=" + req.label + "&_inV=" + req.inV + _buf)
@@ -273,6 +277,7 @@ class Rexy_Engine
 
     #sig id, outV, label, inV
     postEdgeWithId : (ctx, cb, req) ->
+        _buf = ""
         for k,v of req.properties
             _buf += "&" + k + "=" + v
         rest.post(@url + @db + "/edges/" + req._id + "?_outV=" + req.outV + "&_label=" + req.label + "&_inV=" + req.inV + _buf)
@@ -282,6 +287,7 @@ class Rexy_Engine
 
     #properties are k/v pairs of key mappings, as in key=key for the rest, may work with other mappings idk
     postUpdateEdge : (ctx, cb, req) ->
+        _buf = ""
         for k,v of req.properties
             _buf += k + "=" + v + "&"
         _buf = _buf.slice 0, -1
@@ -306,6 +312,7 @@ class Rexy_Engine
     #---PUT Operations---
     
     putReplaceVProperties : (ctx, cb, req, buf ="") ->
+        _buf = ""
         for k,v of req.properties
             _buf += k + "=" + v + "&"
         _buf = _buf.slice 0, -1
@@ -315,6 +322,7 @@ class Rexy_Engine
         true
 
     putReplaceEProperties : (ctx, cb, req) ->
+        _buf = ""
         for k,v of req.properties
             _buf += k + "=" + v + "&"
         _buf = _buf.slice 0, -1
